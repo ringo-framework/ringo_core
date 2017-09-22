@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """Modul for Users"""
 from ringo_core.lib.security import encrypt_password
+from ringo_core.model.base import Base
 
 
 class UserFactory(object):
@@ -24,7 +25,7 @@ class UserFactory(object):
         return User(email, encrypted_password)
 
 
-class User(object):
+class User(Base):
 
     """User class"""
 
@@ -35,6 +36,8 @@ class User(object):
         :password: Encrypted password of the user
 
         """
+        super(User, self).__init__()
+
         self.name = email
         """Username of the user."""
         self.password = password
