@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import uuid
+from datetime import datetime
 
 
 class Base(object):
@@ -9,9 +11,9 @@ class Base(object):
         self.id = None
         """Unique identifier within the database. Used to load datasets
         from the database."""
-        self.uuid = None
+        self.uuid = uuid.uuid4()
         """Globally unique indentifier."""
-        self.created = None
+        self.created = datetime.utcnow()
         """Datetime when the dataset was created."""
-        self.updated = None
+        self.updated = datetime.utcnow()
         """Datetime when the dataset was last modfied."""

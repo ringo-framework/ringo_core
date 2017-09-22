@@ -10,10 +10,12 @@ Tests for `ringo_core.model.base` module.
 
 
 def test_base():
+    import uuid
+    import datetime
     from ringo_core.model.base import Base
 
     base = Base()
     assert base.id is None
-    assert base.uuid is None
-    assert base.created is None
-    assert base.updated is None
+    assert isinstance(base.uuid, uuid.UUID)
+    assert isinstance(base.created, datetime.datetime)
+    assert isinstance(base.updated, datetime.datetime)
