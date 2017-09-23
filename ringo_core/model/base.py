@@ -10,6 +10,11 @@ from ringo_core.model.datatypes import UUID
 
 DBase = declarative_base()
 
+
+def create_model(engine):
+    DBase.metadata.create_all(engine)
+
+
 class Base(DBase):
     """Base for all models in Ringo"""
     __tablename__ = "base"
