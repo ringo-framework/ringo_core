@@ -3,6 +3,7 @@
 import uuid
 from datetime import datetime
 import sqlalchemy as sa
+from sqlalchemy import event
 from sqlalchemy.ext.declarative import declarative_base
 
 from ringo_core.model.datatypes import UUID
@@ -31,3 +32,16 @@ class Base(DBase):
         self.uuid = uuid.uuid4()
         self.created = datetime.utcnow()
         self.updated = datetime.utcnow()
+
+
+@event.listens_for(Base, 'before_update')
+def receive_before_update(mapper, connection, target):
+    """Listen for the 'before_update' event. Make sure that the last
+    updated field is updated as soon as the item has been modified.
+
+    NOTE: The event is *not* triggered in case the uuid is changed. The
+    reason is currently unknown. I expect this is a sideeffect of the
+    defintion of a custom UUID type.
+    """
+    if hasattr(target, "updated"):
+        target.updated = datetime.utcnow()
