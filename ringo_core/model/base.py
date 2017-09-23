@@ -3,15 +3,18 @@
 import uuid
 from datetime import datetime
 import sqlalchemy as sa
+from sqlalchemy.ext.declarative import declarative_base
 
 from ringo_core.model.datatypes import UUID
 
+DBase = declarative_base()
 
-class Base(object):
+class Base(DBase):
     """Base for all models in Ringo"""
+    __tablename__ = "base"
 
     id = sa.Column("id", sa.Integer, primary_key=True)
-    """Unique identifier within the database. Used to load datasets
+    """Local unique identifier within the database. Used to load datasets
     from the database."""
 
     created = sa.Column("uuid", UUID)
