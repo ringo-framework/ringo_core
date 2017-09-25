@@ -15,6 +15,18 @@ def create_model(engine):
     DBase.metadata.create_all(engine)
 
 
+class BaseFactory(object):
+
+    """Factory for base objects"""
+
+    def create(self):
+        """Will create a new :class:`Base` object.
+        :returns: :class:`Base` object.
+
+        """
+        return Base()
+
+
 class Base(DBase):
     """Base for all models in Ringo"""
     __tablename__ = "base"
@@ -37,6 +49,11 @@ class Base(DBase):
         self.uuid = uuid.uuid4()
         self.created = datetime.utcnow()
         self.updated = datetime.utcnow()
+
+    @classmethod
+    def get_factory(cls):
+        """Return an instance of a factory for this class."""
+        return BaseFactory()
 
 
 @event.listens_for(Base, 'before_update')
