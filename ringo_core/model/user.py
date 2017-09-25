@@ -40,3 +40,7 @@ class User(Base):
         """Username of the user."""
         self.password = password
         """Encrypted password of the user."""
+
+    @classmethod
+    def get_factory(self):
+        return UserFactory()
