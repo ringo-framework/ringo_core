@@ -3,12 +3,8 @@
 import uuid
 from datetime import datetime
 import sqlalchemy as sa
-from sqlalchemy import event
-from sqlalchemy.ext.declarative import declarative_base
-
 from ringo_core.model.datatypes import UUID
-
-DBase = declarative_base()
+from ringo_core.lib.db import DBase
 
 
 def create_model(engine):
