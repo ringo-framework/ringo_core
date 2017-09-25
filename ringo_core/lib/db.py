@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from contextlib import contextmanager
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
@@ -25,3 +26,16 @@ def get_db_session(uri='sqlite:///:memory:'):
     engine = get_db_engine(uri)
     Session = sessionmaker(bind=engine)
     return Session()
+
+
+@contextmanager
+def session_scope(session):
+    """Provide a transactional scope around a series of operations."""
+    try:
+        yield session
+        session.commit()
+    except:
+        session.rollback()
+        raise
+    finally:
+        session.close()
