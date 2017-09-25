@@ -75,12 +75,12 @@ def test_read_base_from_db(db, loadedbase):
 def test_update_base_from_db(db, loadedbase):
     """Will check if all values are actually updated, and the updated
     fields is updated."""
-    loadedbase.id = 5
+    import uuid
+    loadedbase.uuid = uuid.uuid4()
     old_updated = loadedbase.updated
     old_created = loadedbase.created
     db.commit()
     updateditem = db.query(Dummy).filter(Dummy.id == loadedbase.id).one()
-    assert updateditem.id == 5
 
     # Now check that the updated attribute changed but not the created
     # item
