@@ -52,3 +52,30 @@ class BaseItem(object):
     def get_factory(cls, db):
         """Return an instance of a factory for this class."""
         return BaseFactory(cls, db)
+
+    @property
+    def fields(self):
+        mapper = sa.inspect(self)
+        return [column.key for column in mapper.attrs]
+
+    @property
+    def values(self):
+        """Returns the values of the item as a dictionary.
+        :returns: Dictionary of values of the item.
+        """
+        values = {}
+        for field in self.fields:
+            values[field] = getattr(self, field)
+        return values
+
+    def set_values(self, values):
+        """Will set values of the item based on the given dictionary. If
+        the dictionary contains values which are not part of the item
+        (within self.fields) the value will be silently ignored.
+
+        :values: Dictionary of values.
+        """
+        for field in self.fields:
+            value = values.get(field)
+            if value is not None:
+                setattr(self, field, value)

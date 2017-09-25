@@ -34,10 +34,11 @@ def loadedbase(db):
     return db.query(Dummy).filter(Dummy.id == base_id).one()
 
 
-def test_create_base():
+def test_create_base(db):
     import uuid
     import datetime
-    base = Dummy()
+    factory = Dummy.get_factory(db)
+    base = factory.create()
     assert base.id is None
     assert isinstance(base.uuid, uuid.UUID)
     assert isinstance(base.created, datetime.datetime)
@@ -46,6 +47,22 @@ def test_create_base():
 
 def test_create_base_in_db(db, newbase):
     assert newbase.id == 1
+
+
+def test_base_fields(db, newbase):
+    assert len(newbase.fields) == 4
+
+
+def test_base_values(db, newbase):
+    assert len(newbase.values) == 4
+
+
+def test_base_set_values(db, newbase):
+    import uuid
+    newuuid = uuid.uuid4()
+    result = newbase.set_values({"uuid": newuuid})
+    assert newbase.uuid == newuuid
+    assert result is None
 
 
 def test_read_base_from_db(db, loadedbase):
@@ -62,7 +79,7 @@ def test_update_base_from_db(db, loadedbase):
     """Will check if all values are actually updated, and the updated
     fields is updated."""
     import uuid
-    loadedbase.uuid = uuid.uuid4()
+    loadedbase.set_values({"uuid": uuid.uuid4()})
     old_updated = loadedbase.updated
     old_created = loadedbase.created
     db.commit()
