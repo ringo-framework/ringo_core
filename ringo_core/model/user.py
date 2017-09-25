@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 """Modul for Users"""
 from ringo_core.lib.security import encrypt_password
-from ringo_core.model.base import Base
+from ringo_core.model.base import DBase, Base, BaseFactory
 
 
-class UserFactory(object):
+class UserFactory(BaseFactory):
 
     """Factory for user objects"""
 
@@ -23,8 +23,7 @@ class UserFactory(object):
         return User(name, encrypted_password)
 
 
-class User(Base):
-
+class User(Base, DBase):
     """User class"""
 
     def __init__(self, name, password):
@@ -42,5 +41,5 @@ class User(Base):
         """Encrypted password of the user."""
 
     @classmethod
-    def get_factory(self):
-        return UserFactory()
+    def get_factory(cls, db):
+        return UserFactory(User, db)
