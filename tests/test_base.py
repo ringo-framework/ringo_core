@@ -10,10 +10,11 @@ Tests for `ringo_core.model.base` module.
 from datetime import datetime
 import pytest
 from sqlalchemy import event
-from ringo_core.model.base import BaseItem, DBase
+from ringo_core.model.base import BaseItem
+from ringo_core.lib.db import Base
 
 
-class Dummy(BaseItem, DBase):
+class Dummy(BaseItem, Base):
     __tablename__ = "base"
 
 

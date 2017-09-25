@@ -3,7 +3,8 @@
 """Modul for Users"""
 import sqlalchemy as sa
 from ringo_core.lib.security import encrypt_password
-from ringo_core.model.base import DBase, BaseItem, BaseFactory
+from ringo_core.lib.db import Base
+from ringo_core.model.base import BaseItem, BaseFactory
 
 
 class UserFactory(BaseFactory):
@@ -24,7 +25,7 @@ class UserFactory(BaseFactory):
         return User(name, encrypted_password)
 
 
-class User(BaseItem, DBase):
+class User(BaseItem, Base):
     """User class"""
     __tablename__ = "users"
 

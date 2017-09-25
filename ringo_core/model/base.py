@@ -4,11 +4,11 @@ import uuid
 from datetime import datetime
 import sqlalchemy as sa
 from ringo_core.model.datatypes import UUID
-from ringo_core.lib.db import DBase
+from ringo_core.lib.db import Base
 
 
 def create_model(engine):
-    DBase.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
 
 
 class BaseFactory(object):
