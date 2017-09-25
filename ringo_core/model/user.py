@@ -5,6 +5,7 @@ import sqlalchemy as sa
 from ringo_core.lib.security import encrypt_password
 from ringo_core.lib.db import Base
 from ringo_core.model.base import BaseItem, BaseFactory
+from ringo_core.model.mixins import Protocol
 
 
 class UserFactory(BaseFactory):
@@ -25,7 +26,7 @@ class UserFactory(BaseFactory):
         return User(name, encrypted_password)
 
 
-class User(BaseItem, Base):
+class User(Protocol, BaseItem, Base):
     """User class"""
     __tablename__ = "users"
 

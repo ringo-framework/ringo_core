@@ -7,28 +7,14 @@ test_base
 
 Tests for `ringo_core.model.base` module.
 """
-from datetime import datetime
 import pytest
-from sqlalchemy import event
 from ringo_core.model.base import BaseItem
+from ringo_core.model.mixins import Protocol
 from ringo_core.lib.db import Base
 
 
-class Dummy(BaseItem, Base):
+class Dummy(Protocol, BaseItem, Base):
     __tablename__ = "base"
-
-
-@event.listens_for(Dummy, 'before_update')
-def receive_before_update(mapper, connection, target):
-    """Listen for the 'before_update' event. Make sure that the last
-    updated field is updated as soon as the item has been modified.
-
-    NOTE: The event is *not* triggered in case the uuid is changed. The
-    reason is currently unknown. I expect this is a sideeffect of the
-    defintion of a custom UUID type.
-    """
-    if hasattr(target, "updated"):
-        target.updated = datetime.utcnow()
 
 
 @pytest.fixture()
