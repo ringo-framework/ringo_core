@@ -34,7 +34,7 @@ class BaseFactory(object):
         return self.db.query(self.clazz).filter(self.clazz.id == item_id).one()
 
 
-class Base():
+class BaseItem(object):
     """Base for all models in Ringo"""
 
     id = sa.Column("id", sa.Integer, primary_key=True)

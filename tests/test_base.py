@@ -10,14 +10,14 @@ Tests for `ringo_core.model.base` module.
 from datetime import datetime
 import pytest
 from sqlalchemy import event
-from ringo_core.model.base import Base as _Base, DBase
+from ringo_core.model.base import BaseItem, DBase
 
 
-class Base(_Base, DBase):
+class Dummy(BaseItem, DBase):
     __tablename__ = "base"
 
 
-@event.listens_for(Base, 'before_update')
+@event.listens_for(Dummy, 'before_update')
 def receive_before_update(mapper, connection, target):
     """Listen for the 'before_update' event. Make sure that the last
     updated field is updated as soon as the item has been modified.
@@ -32,7 +32,7 @@ def receive_before_update(mapper, connection, target):
 
 @pytest.fixture()
 def newbase(db):
-    base = Base()
+    base = Dummy()
     db.add(base)
     db.commit()
     return base
@@ -40,17 +40,17 @@ def newbase(db):
 
 @pytest.fixture()
 def loadedbase(db):
-    base = Base()
+    base = Dummy()
     db.add(base)
     db.commit()
     base_id = base.id
-    return db.query(Base).filter(Base.id == base_id).one()
+    return db.query(Dummy).filter(Dummy.id == base_id).one()
 
 
 def test_create_base():
     import uuid
     import datetime
-    base = Base()
+    base = Dummy()
     assert base.id is None
     assert isinstance(base.uuid, uuid.UUID)
     assert isinstance(base.created, datetime.datetime)
@@ -78,7 +78,7 @@ def test_update_base_from_db(db, loadedbase):
     old_updated = loadedbase.updated
     old_created = loadedbase.created
     db.commit()
-    updateditem = db.query(Base).filter(Base.id == loadedbase.id).one()
+    updateditem = db.query(Dummy).filter(Dummy.id == loadedbase.id).one()
     assert updateditem.id == 5
 
     # Now check that the updated attribute changed but not the created
@@ -90,7 +90,7 @@ def test_update_base_from_db(db, loadedbase):
 def test_delete_base_from_db(db):
     """Will check if all values are actually updated, and the updated
     fields is updated."""
-    all_items = db.query(Base).all()
+    all_items = db.query(Dummy).all()
     num = len(all_items)
     assert num >= 2
 
@@ -98,5 +98,5 @@ def test_delete_base_from_db(db):
     db.delete(last)
     db.commit()
 
-    all_items = db.query(Base).all()
+    all_items = db.query(Dummy).all()
     assert num == len(all_items) + 1
