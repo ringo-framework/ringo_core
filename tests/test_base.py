@@ -7,7 +7,6 @@ test_base
 
 Tests for `ringo_core.model.base` module.
 """
-from sqlalchemy import event
 import pytest
 from ringo_core.model.base import Base
 
@@ -27,8 +26,6 @@ def loadedbase(db):
     db.commit()
     base_id = base.id
     return db.query(Base).filter(Base.id == base_id).one()
-
-
 
 
 def test_create_base():
