@@ -43,11 +43,11 @@ def test_get_scopedsession_rollback():
 def test_get_scopedsession_detach_exception(db):
     from sqlalchemy.orm.exc import DetachedInstanceError
     from ringo_core.lib.db import session_scope
-    from ringo_core.model.base import Base
+    from ringo_core.model.user import User
     with pytest.raises(DetachedInstanceError):
         with session_scope(db) as session:
-            factory = Base.get_factory()
-            new = factory.create()
+            factory = User.get_factory(db)
+            new = factory.create("Foo", "Bar")
             session.add(new)
             session.flush()
 

@@ -19,17 +19,27 @@ class BaseFactory(object):
 
     """Factory for base objects"""
 
+    def __init__(self, clazz, db):
+        self.clazz = clazz
+        self.db = db
+
     def create(self):
         """Will create a new :class:`Base` object.
         :returns: :class:`Base` object.
 
         """
-        return Base()
+        return self.clazz()
+
+    def load(self, item_id):
+        """Will create a new :class:`Base` object.
+        :returns: :class:`Base` object.
+
+        """
+        return self.db.query(self.clazz).filter(self.clazz.id == item_id).one()
 
 
-class Base(DBase):
+class Base():
     """Base for all models in Ringo"""
-    __tablename__ = "base"
 
     id = sa.Column("id", sa.Integer, primary_key=True)
     """Local unique identifier within the database. Used to load datasets
@@ -51,7 +61,7 @@ class Base(DBase):
         self.updated = datetime.utcnow()
 
     @classmethod
-    def get_factory(cls):
+    def get_factory(cls, db):
         """Return an instance of a factory for this class."""
         return BaseFactory()
 

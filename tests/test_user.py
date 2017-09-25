@@ -12,9 +12,9 @@ import pytest
 
 
 @pytest.fixture
-def user_factory():
-    from ringo_core.model.user import UserFactory
-    return UserFactory()
+def user_factory(db):
+    from ringo_core.model.user import User
+    return User.get_factory(db)
 
 
 def test_create(user_factory):
