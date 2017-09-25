@@ -4,7 +4,7 @@
 from ringo_core.model.base import BaseItem
 
 
-def create(db, clazz, values):
+def _create(db, clazz, values):
     """Will return a new instance of the given class. The new instance
     will created by the specific factory of the clazz initiated
     with the given values (If the factory makes use of the values).
@@ -35,7 +35,7 @@ def create(db, clazz, values):
     return instance
 
 
-def read(db, clazz, item_id):
+def _read(db, clazz, item_id):
     """TODO: Docstring for read.
 
     :clazz: TODO
@@ -52,7 +52,7 @@ def read(db, clazz, item_id):
     return instance
 
 
-def update(db, clazz, item_id, values):
+def _update(db, clazz, item_id, values):
     """
     :clazz: TODO
     :item_id: TODO
@@ -70,7 +70,7 @@ def update(db, clazz, item_id, values):
     return instance
 
 
-def delete(db, clazz, item_id):
+def _delete(db, clazz, item_id):
     """TODO: Docstring for delete.
 
     :db: TODO
