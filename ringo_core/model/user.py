@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Modul for Users"""
+import sqlalchemy as sa
 from ringo_core.lib.security import encrypt_password
 from ringo_core.model.base import DBase, Base, BaseFactory
 
@@ -25,20 +26,22 @@ class UserFactory(BaseFactory):
 
 class User(Base, DBase):
     """User class"""
+    __tablename__ = "users"
+
+    name = sa.Column("name", sa.String, nullable=False)
+    """Username of the user."""
+    password = sa.Column("password", sa.String, nullable=False)
+    """Encrypted password of the user."""
 
     def __init__(self, name, password):
         """TODO: to be defined1.
-
         :name: Name of the user used as username
         :password: Encrypted password of the user
-
         """
         super(User, self).__init__()
 
         self.name = name
-        """Username of the user."""
         self.password = password
-        """Encrypted password of the user."""
 
     @classmethod
     def get_factory(cls, db):
