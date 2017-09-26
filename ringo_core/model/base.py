@@ -35,7 +35,7 @@ class BaseItem(object):
     """Local unique identifier within the database. Used to load datasets
     from the database."""
 
-    uuid = sa.Column("uuid", UUID)
+    uuid = sa.Column("uuid", UUID, unique=True)
     """Globally unique indentifier."""
 
     def __init__(self):
