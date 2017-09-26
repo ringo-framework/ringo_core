@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+from lib.db import (  # noqa: E731
+        init_db,
+        get_db_engine
+)
+from model import *  # noqa: E731
 
 __author__ = """Torsten Irländer"""
 __email__ = 'torsten.irlaender@googlemail.com'

@@ -3,11 +3,6 @@
 import uuid
 import sqlalchemy as sa
 from ringo_core.model.datatypes import UUID
-from ringo_core.lib.db import Base
-
-
-def create_model(engine):
-    Base.metadata.create_all(engine)
 
 
 class BaseFactory(object):
@@ -58,8 +53,7 @@ class BaseItem(object):
         mapper = sa.inspect(self)
         return [column.key for column in mapper.attrs]
 
-    @property
-    def values(self):
+    def get_values(self):
         """Returns the values of the item as a dictionary.
         :returns: Dictionary of values of the item.
         """

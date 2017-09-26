@@ -53,8 +53,8 @@ def test_base_fields(db, newbase):
     assert len(newbase.fields) == 4
 
 
-def test_base_values(db, newbase):
-    assert len(newbase.values) == 4
+def test_base_get_values(db, newbase):
+    assert len(newbase.get_values()) == 4
 
 
 def test_base_set_values(db, newbase):

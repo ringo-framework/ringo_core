@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import pytest
-from ringo_core.model.base import create_model
+from ringo_core.lib.db import init_db
 
 
 @pytest.fixture(scope='session')
 def dbmodel(request, engine):
-    create_model(engine)
+    init_db(engine)
 
 
 @pytest.fixture()
