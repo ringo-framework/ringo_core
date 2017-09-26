@@ -1,19 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Basic CRUD API"""
+"""Internal API for CRUD actions. These methods provide elementary
+functionality to create, read, update and delete elements from database.
+These methods are **not** menat to be used directly. The are used by
+public API."""
 from ringo_core.model.base import BaseItem
 
 
 def _create(db, clazz, values):
-    """Will return a new instance of the given class. The new instance
-    will created by the specific factory of the clazz initiated
-    with the given values (If the factory makes use of the values).
+    """Will return a new instance of `clazz`. The new instance will be
+    added to the given `db` session and is initiated with the given
+    `values`
 
-    `db` session to the database.
+    .. seealso::
+
+        Create method of the specific factory of `clazz`
+
     `clazz` must be a subclass of :class:`BaseItem`. If not a TypeError
     will be raised.
-    `values` must be if type dict. If not a TypeError will be raised.
+    `values` must be of type dict. If not a TypeError will be raised.
 
+    :db: Session to the database.
     :clazz: Class of which an instance should be created.
     :values: Dictionary of values used for initialisation.
     :returns: Instance of clazz
@@ -36,11 +43,21 @@ def _create(db, clazz, values):
 
 
 def _read(db, clazz, item_id):
-    """TODO: Docstring for read.
+    """Will return a instance of `clazz`. The instance is read from the
+    given `db` session.
 
-    :clazz: TODO
-    :item_id: TODO
-    :returns: TODO
+    .. seealso::
+
+        `load` method of the specific factory of `clazz`
+
+    `clazz` must be a subclass of :class:`BaseItem`. If not a TypeError
+    will be raised.
+    `item_id` must be of type integer. If not a TypeError will be raised.
+
+    :db: Session to the database.
+    :clazz: Class of which an instance should be loaded.
+    :item_id: ID of the item which should be loaded.
+    :returns: Instance of clazz
 
     """
     if not issubclass(clazz, BaseItem):
@@ -53,10 +70,26 @@ def _read(db, clazz, item_id):
 
 
 def _update(db, clazz, item_id, values):
-    """
-    :clazz: TODO
-    :item_id: TODO
-    :returns: TODO
+    """Will update a instance of `clazz`. The instance is read from the
+    given `db` session and then updated with the given values. Values
+    for attributes which are not part of `clazz` are silently ignored.
+
+    .. seealso::
+
+        `load` method of the specific factory of `clazz`
+        values Me
+        `set_values` method of the specific `clazz`
+
+    `clazz` must be a subclass of :class:`BaseItem`. If not a TypeError
+    will be raised.
+    `item_id` must be of type integer. If not a TypeError will be raised.
+    `values` must be of type dict. If not a TypeError will be raised.
+
+    :db: Session to the database.
+    :clazz: Class of which an instance should be loaded.
+    :item_id: ID of the item which should be loaded.
+    :values: Dictionary of values used for initialisation.
+    :returns: Instance of clazz
     """
     if not issubclass(clazz, BaseItem):
         raise TypeError("Create must be called with a clazz of type {}".format(BaseItem))
@@ -71,13 +104,21 @@ def _update(db, clazz, item_id, values):
 
 
 def _delete(db, clazz, item_id):
-    """TODO: Docstring for delete.
+    """Will delete a instance of `clazz`. The instance will be removed
+    from the database.
 
-    :db: TODO
-    :clazz: TODO
-    :item_id: TODO
-    :returns: TODO
+    .. seealso::
 
+        `create` method of the specific factory of `clazz`
+
+    `clazz` must be a subclass of :class:`BaseItem`. If not a TypeError
+    will be raised.
+    `item_id` must be of type integer. If not a TypeError will be raised.
+
+    :db: Session to the database.
+    :clazz: Class of which an instance should be loaded.
+    :item_id: ID of the item which should be loaded.
+    :returns: Instance of clazz
     """
     factory = clazz.get_factory(db)
     instance = factory.load(item_id)
