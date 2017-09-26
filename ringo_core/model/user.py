@@ -30,7 +30,7 @@ class User(Protocol, BaseItem, Base):
     """User class"""
     __tablename__ = "users"
 
-    name = sa.Column("name", sa.String, nullable=False)
+    name = sa.Column("name", sa.String, nullable=False, unique=True)
     """Username of the user."""
     password = sa.Column("password", sa.String, nullable=False)
     """Encrypted password of the user."""
