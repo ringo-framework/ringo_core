@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import random
+import string
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(
@@ -14,6 +16,16 @@ pwd_context = CryptContext(
     # and the amount of time you wish it to take)
     pbkdf2_sha256__default_rounds=8000,
 )
+
+
+def generate_password(length=8):
+    """Will generate a random generated password. The password consists
+    of string letters and string digits.
+
+    :length: Length of password
+    :returns: Unencrypted password
+    """
+    return ''.join([random.choice(string.ascii_letters + string.digits) for n in range(length)])
 
 
 def encrypt_password(password, scheme=None):
