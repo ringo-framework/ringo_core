@@ -1,6 +1,5 @@
 from __future__ import with_statement
 from alembic import context
-from sqlalchemy import engine_from_config, pool
 from logging.config import fileConfig
 from ringo_core.lib.db import Base, DB_URI, get_db_engine
 
@@ -50,11 +49,6 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    #connectable = engine_from_config(
-    #    config.get_section(config.config_ini_section),
-    #    prefix='sqlalchemy.',
-    #    poolclass=pool.NullPool)
-
     connectable = get_db_engine(DB_URI)
 
     with connectable.connect() as connection:

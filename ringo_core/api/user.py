@@ -95,3 +95,31 @@ def delete(item_id):
     """
     with session_scope(get_db_session()) as db:
         return _delete(db, User, item_id)
+
+
+def reset_password(item_id, password=None):
+    """Will reset the password of the user.
+
+    .. seealso:: Methods :func:`ringo_core.model.user.reset_password`
+
+    :item_id: ID of the user to update
+    :password: Unencrypted password
+    :returns: Unencrypted password
+
+    >>> import ringo_core.api.user
+    >>> # First create a new user.
+    >>> newuser = ringo_core.api.user.create(name="foo5", password="bar")
+    >>> oldpass = newuser.password
+    >>> # Set custom password.
+    >>> result = ringo_core.api.user.reset_password(item_id = newuser.id, password = "newpass")
+    >>> result == "newpass"
+    True
+    >>> # Set random password.
+    >>> result = ringo_core.api.user.reset_password(item_id = newuser.id)
+    >>> result != "newpass"
+    True
+    """
+    with session_scope(get_db_session()) as db:
+        user = _read(db, User, item_id)
+        new_password = user.reset_password(password)
+    return new_password

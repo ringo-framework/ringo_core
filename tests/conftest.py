@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import pytest
-import random
-import string
+from ringo_core.lib.security import generate_password
 from ringo_core.lib.db import init_db
 
 # Initialise a SQLite Database for doctests. Doctests can not use the
@@ -25,7 +24,4 @@ def db(request, dbmodel, dbsession):
 
 @pytest.fixture()
 def randomstring(request):
-    def generator(length):
-        return ''.join([random.choice(string.ascii_letters + string.digits) for n in range(length)])
-
-    return generator
+    return generate_password
