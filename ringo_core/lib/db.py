@@ -10,15 +10,16 @@ Base = declarative_base()
 
 DEFAUL_DB_URI = "sqlite:///:memory:"
 DB_URI = os.environ.get("RINGO_CORE_DB_URI", DEFAUL_DB_URI)
+ENGINE = create_engine(DB_URI, echo=False)
 
 
 def init_db(engine=None):
     if engine is None:
-        engine = get_db_engine()
+        engine = ENGINE
     Base.metadata.create_all(engine)
 
 
-def get_db_engine(uri=DB_URI, echo=False):
+def get_db_engine(uri=None, echo=False):
     """
 
     :uri: Connection string to the database.
@@ -26,11 +27,14 @@ def get_db_engine(uri=DB_URI, echo=False):
     :returns: database engine
 
     """
-    engine = create_engine(uri, echo=echo)
-    return engine
+    global ENGINE
+    if uri is None:
+        return ENGINE
+    else:
+        return create_engine(uri, echo=echo)
 
 
-def get_db_session(uri=DB_URI):
+def get_db_session(uri=None):
     """Return a db session to the given database defined by the URI
 
     :uri: TODO
