@@ -100,10 +100,6 @@ def delete(item_id):
 def reset_password(item_id, password=None):
     """Will reset the password of the user.
 
-    :item_id: ID of the user to update
-    :password: Unencrypted password
-    :returns: Unencrypted password
-
     .. seealso:: Methods :func:`ringo_core.model.user.reset_password`
 
     :item_id: ID of the user to update

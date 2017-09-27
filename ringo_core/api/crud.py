@@ -3,7 +3,15 @@
 """Internal API for CRUD actions. These methods provide elementary
 functionality to create, read, update and delete elements from database.
 These methods are **not** menat to be used directly. The are used by
-public API."""
+public API.
+
+The methods are kept very simple and does nothing than actually reading
+and writing to the database.
+
+.. warning::
+    This API is an internal API and is **not** meant to be used directly!
+
+"""
 from ringo_core.model.base import BaseItem
 
 
