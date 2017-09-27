@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import pytest
+import random
+import string
 from ringo_core.lib.db import init_db
 
 # Initialise a SQLite Database for doctests. Doctests can not use the
@@ -19,3 +21,11 @@ def dbmodel(request, engine):
 @pytest.fixture()
 def db(request, dbmodel, dbsession):
     return dbsession
+
+
+@pytest.fixture()
+def randomstring(request):
+    def generator(length):
+        return ''.join([random.choice(string.ascii_letters + string.digits) for n in range(length)])
+
+    return generator
