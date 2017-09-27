@@ -12,7 +12,7 @@ import pytest
 
 def test_get_engine():
     from ringo_core.lib.db import get_db_engine
-    engine = get_db_engine()
+    engine = get_db_engine('sqlite:///:memory:')
     assert engine is not None
 
 
