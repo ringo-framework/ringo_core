@@ -61,3 +61,14 @@ def test_delete(randomstring):
     ringo_core.api.user.delete(user.id)
     with pytest.raises(sa.orm.exc.NoResultFound):
         user = ringo_core.api.user.read(9999)
+
+
+def test_reset_password(randomstring):
+    import ringo_core.api.user
+    password = randomstring(8)
+    name = randomstring(8)
+    user = ringo_core.api.user.create(name=name, password="password")
+    result = ringo_core.api.user.reset_password(user.id, password)
+    assert result == password
+    result = ringo_core.api.user.reset_password(user.id)
+    assert result != password
