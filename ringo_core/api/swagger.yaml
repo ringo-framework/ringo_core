@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: Item Example API
+  title: Ringo Core API
   version: "0.1"
 consumes:
   - servicelication/json
@@ -11,11 +11,11 @@ security:
   # (only active if the TOKENINFO_URL environment variable is set)
   - oauth2: [uid]
 paths:
-  /items:
+  /users:
     get:
-      tags: [Items]
+      tags: [Users]
       operationId: ringo_service.api.search
-      summary: Get all items
+      summary: Get all users
       parameters:
         - name: limit
           in: query
@@ -24,67 +24,67 @@ paths:
           default: 100
       responses:
         200:
-          description: Return items
+          description: Return users
           schema:
             type: array
             items:
-              $ref: '#/definitions/Item'
+              $ref: '#/definitions/User'
     post:
-      tags: [Items]
+      tags: [Users]
       operationId: ringo_service.api.create
-      summary: Create a item
+      summary: Create a user
       parameters:
-        - name: item
+        - name: user
           in: body
           schema:
-            $ref: '#/definitions/Item'
+            $ref: '#/definitions/User'
       responses:
         201:
-          description: New item created
-  /items/{item_id}:
+          description: New user created
+  /users/{user_id}:
     get:
-      tags: [Items]
+      tags: [Users]
       operationId: ringo_service.api.read
-      summary: Get a single item
+      summary: Get a single user
       parameters:
-        - $ref: '#/parameters/item_id'
+        - $ref: '#/parameters/user_id'
       responses:
         200:
-          description: Return item
+          description: Return user
           schema:
-            $ref: '#/definitions/Item'
+            $ref: '#/definitions/User'
         404:
-          description: Item does not exist
+          description: User does not exist
     put:
-      tags: [Items]
+      tags: [Users]
       operationId: ringo_service.api.update
-      summary: Update a item
+      summary: Update a user
       parameters:
-        - $ref: '#/parameters/item_id'
-        - name: item
+        - $ref: '#/parameters/user_id'
+        - name: user
           in: body
           schema:
-            $ref: '#/definitions/Item'
+            $ref: '#/definitions/User'
       responses:
         200:
-          description: Item updated
+          description: User updated
     delete:
-      tags: [Items]
+      tags: [Users]
       operationId: ringo_service.api.delete
-      summary: Remove a item
+      summary: Remove a user
       parameters:
-        - $ref: '#/parameters/item_id'
+        - $ref: '#/parameters/user_id'
       responses:
         204:
-          description: Item was deleted
+          description: User was deleted
         404:
-          description: Item does not exist
+          description: User does not exist
 
 
 parameters:
-  item_id:
-    name: item_id
-    description: Item's Unique identifier
+  user_id:
+    name: user_id
+    description: User's Unique identifier
     in: path
     type: integer
     required: true
