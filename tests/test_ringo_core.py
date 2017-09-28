@@ -11,7 +11,7 @@ Tests for `ringo_core` module.
 import pytest
 
 
-from ringo_core import ringo_core
+from ringo_core import core
 
 
 @pytest.fixture
