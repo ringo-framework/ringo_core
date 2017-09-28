@@ -18,6 +18,15 @@ def test_not_found():
         ringo_core.api.user.read(9999)
 
 
+def test_search(randomstring):
+    import ringo_core.api.user
+    name = randomstring(8)
+    ringo_core.api.user.create(name=name, password="password")
+    users = ringo_core.api.user.search()
+    assert isinstance(users, list)
+    assert len(users) > 0
+
+
 def test_create(randomstring):
     import ringo_core.api.user
     name = randomstring(8)

@@ -10,6 +10,10 @@ Tests for `ringo_core.api.crud` module.
 import pytest
 from ringo_core.model.user import User
 
+def test_searech_fail_because_not_base(db):
+    from ringo_core.api.crud import _search
+    with pytest.raises(TypeError):
+        _search(db, object)
 
 def test_create_fail_because_not_base(db):
     from ringo_core.api.crud import _create

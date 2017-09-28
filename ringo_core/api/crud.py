@@ -15,6 +15,18 @@ and writing to the database.
 from ringo_core.model.base import BaseItem
 
 
+def _search(db, clazz):
+    """Will return all instances of `clazz`.
+
+    :db: Session to the database.
+    :clazz: Class of which the instances should be loaded.
+    :returns: List of instances of clazz
+    """
+    if not issubclass(clazz, BaseItem):
+        raise TypeError("Create must be called with a clazz of type {}".format(BaseItem))
+    return db.query(clazz).all()
+
+
 def _create(db, clazz, values):
     """Will return a new instance of `clazz`. The new instance will be
     added to the given `db` session and is initiated with the given
