@@ -3,9 +3,11 @@
 
 """
 Public API of the user model"""
+from ringo_service.api import service_config
 from ringo_core.lib.db import get_db_session, session_scope
 from ringo_core.model.user import User
 from ringo_core.api.crud import (
+    _search,
     _create,
     _read,
     _update,
@@ -13,6 +15,25 @@ from ringo_core.api.crud import (
 )
 
 
+@service_config
+def search():
+    """Loads all users.
+
+    .. seealso:: Methods :func:`ringo_core.api.crud._search`
+
+    :returns: List of :class:`User` instances
+
+    >>> import ringo_core.api.user
+    >>> users = ringo_core.api.user.search()
+    >>> isinstance(users, list)
+    True
+    """
+    with session_scope(get_db_session(), close=False) as db:
+        users = _search(db, User)
+    return users
+
+
+@service_config
 def create(name, password):
     """Creates a new user with the given `name` and `password`.
 
@@ -32,6 +53,7 @@ def create(name, password):
     return user
 
 
+@service_config
 def read(item_id):
     """Read (load) a existing user from the database.
 
@@ -53,6 +75,7 @@ def read(item_id):
         return _read(db, User, item_id)
 
 
+@service_config
 def update(item_id, values):
     """Update a user with the given values in the database.
 
@@ -75,6 +98,7 @@ def update(item_id, values):
         return _update(db, User, item_id, values)
 
 
+@service_config
 def delete(item_id):
     """Deletes a user from the database.
 
