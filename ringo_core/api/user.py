@@ -3,7 +3,7 @@
 
 """
 Public API of the user model"""
-from ringo_service.api import service_config
+from ringo_service.api import register_api
 from ringo_core.lib.db import get_db_session, session_scope
 from ringo_core.model.user import User
 from ringo_core.api.crud import (
@@ -15,7 +15,7 @@ from ringo_core.api.crud import (
 )
 
 
-@service_config
+@register_api()
 def search():
     """Loads all users.
 
@@ -33,7 +33,7 @@ def search():
     return users
 
 
-@service_config
+@register_api()
 def create(name, password):
     """Creates a new user with the given `name` and `password`.
 
@@ -53,7 +53,7 @@ def create(name, password):
     return user
 
 
-@service_config
+@register_api()
 def read(item_id):
     """Read (load) a existing user from the database.
 
@@ -75,7 +75,7 @@ def read(item_id):
         return _read(db, User, item_id)
 
 
-@service_config
+@register_api()
 def update(item_id, values):
     """Update a user with the given values in the database.
 
@@ -98,7 +98,7 @@ def update(item_id, values):
         return _update(db, User, item_id, values)
 
 
-@service_config
+@register_api()
 def delete(item_id):
     """Deletes a user from the database.
 
