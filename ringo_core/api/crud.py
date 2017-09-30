@@ -12,6 +12,8 @@ and writing to the database.
     This API is an internal API and is **not** meant to be used directly!
 
 """
+import sqlalchemy as sa
+from ringo_service.api import NotFound
 from ringo_core.model.base import BaseItem
 
 
@@ -85,7 +87,10 @@ def _read(db, clazz, item_id):
     if not isinstance(item_id, int):
         raise TypeError("item_id must be called with a value of type {}".format(int))
     factory = clazz.get_factory(db)
-    instance = factory.load(item_id)
+    try:
+        instance = factory.load(item_id)
+    except sa.orm.exc.NoResultFound:
+        raise NotFound()
     return instance
 
 
@@ -118,7 +123,10 @@ def _update(db, clazz, item_id, values):
     if not isinstance(values, dict):
         raise TypeError("Create must be called with a values of type {}".format(dict))
     factory = clazz.get_factory(db)
-    instance = factory.load(item_id)
+    try:
+        instance = factory.load(item_id)
+    except sa.orm.exc.NoResultFound:
+        raise NotFound()
     instance.set_values(values)
     return instance
 
@@ -141,5 +149,8 @@ def _delete(db, clazz, item_id):
     :returns: Instance of clazz
     """
     factory = clazz.get_factory(db)
-    instance = factory.load(item_id)
+    try:
+        instance = factory.load(item_id)
+    except sa.orm.exc.NoResultFound:
+        raise NotFound()
     db.delete(instance)
