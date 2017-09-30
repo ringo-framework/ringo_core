@@ -26,6 +26,7 @@ class UserFactory(BaseFactory):
         encrypted_password = encrypt_password(password)
         return User(name, encrypted_password)
 
+
 @config_service_model()
 class User(Protocol, BaseItem, Base):
     """User class"""
