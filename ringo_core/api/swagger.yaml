@@ -6,10 +6,10 @@ consumes:
   - servicelication/json
 produces:
   - servicelication/json
-security:
-  # enable OAuth protection for all REST endpoints
-  # (only active if the TOKENINFO_URL environment variable is set)
-  - oauth2: [uid]
+# security:
+#   # enable OAuth protection for all REST endpoints
+#   # (only active if the TOKENINFO_URL environment variable is set)
+#   - oauth2: [uid]
 paths:
   /users:
     get:
