@@ -43,6 +43,9 @@ class BaseItem(object):
         self.id = None
         self.uuid = uuid.uuid4()
 
+    def __json__(self):
+        return self.get_values()
+
     @classmethod
     def get_factory(cls, db):
         """Return an instance of a factory for this class."""
