@@ -15,8 +15,8 @@ from ringo_core.api.crud import (
 )
 
 
-@config_service_endpoint()
-def search():
+@config_service_endpoint(path="/users", method="GET")
+def search(limit=100):
     """Loads all users.
 
     .. seealso:: Methods :func:`ringo_core.api.crud._search`
@@ -33,7 +33,7 @@ def search():
     return users
 
 
-@config_service_endpoint()
+@config_service_endpoint(path="/users", method="POST")
 def create(name, password):
     """Creates a new user with the given `name` and `password`.
 
@@ -53,7 +53,7 @@ def create(name, password):
     return user
 
 
-@config_service_endpoint()
+@config_service_endpoint(path="/users/{item_id}", method="GET")
 def read(item_id):
     """Read (load) a existing user from the database.
 
@@ -75,7 +75,7 @@ def read(item_id):
         return _read(db, User, item_id)
 
 
-@config_service_endpoint()
+@config_service_endpoint(path="/users/{item_id}", method="PUT")
 def update(item_id, values):
     """Update a user with the given values in the database.
 
@@ -98,7 +98,7 @@ def update(item_id, values):
         return _update(db, User, item_id, values)
 
 
-@config_service_endpoint()
+@config_service_endpoint(path="/users/{item_id}", method="DELETE")
 def delete(item_id):
     """Deletes a user from the database.
 
@@ -121,6 +121,7 @@ def delete(item_id):
         return _delete(db, User, item_id)
 
 
+@config_service_endpoint(path="/users/{item_id}/password", method="POST")
 def reset_password(item_id, password=None):
     """Will reset the password of the user.
 
