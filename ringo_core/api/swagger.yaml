@@ -79,8 +79,31 @@ paths:
           description: User was deleted
         404:
           description: User does not exist
-
-
+  /users/{item_id}/password:
+    post:
+      tags: [Users]
+      operationId: ringo_service.api.generic
+      summary: Get a single user
+      parameters:
+        - $ref: '#/parameters/item_id'
+        - name: 'values'
+          in: 'body'
+          description: 'Password of the user'
+          schema:
+            type: object
+            properties:
+                password:
+                  type: string
+      responses:
+        200:
+          description: Return user password
+          schema:
+            type: object
+            properties:
+                password:
+                  type: string
+        404:
+          description: User does not exist
 parameters:
   item_id:
     name: item_id
