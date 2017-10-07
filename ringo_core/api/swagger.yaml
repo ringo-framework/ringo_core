@@ -112,6 +112,7 @@ parameters:
     type: integer
     required: true
 
+definitions:
 ${definitions}
 
 securityDefinitions:
