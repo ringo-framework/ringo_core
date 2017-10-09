@@ -17,16 +17,18 @@ from ringo_service.api import NotFound
 from ringo_core.model.base import BaseItem
 
 
-def _search(db, clazz, limit):
+def _search(db, clazz, limit=20, offset=0):
     """Will return all instances of `clazz`.
 
     :db: Session to the database.
     :clazz: Class of which the instances should be loaded.
+    :limit: Limit number of result to N entries
+    :offset: Return entries with an offset of N
     :returns: List of instances of clazz
     """
     if not issubclass(clazz, BaseItem):
         raise TypeError("Create must be called with a clazz of type {}".format(BaseItem))
-    return db.query(clazz).limit(limit).all()
+    return db.query(clazz).slice(offset, limit).all()
 
 
 def _create(db, clazz, values):

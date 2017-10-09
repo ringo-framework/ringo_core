@@ -16,11 +16,13 @@ from ringo_core.api.crud import (
 
 
 @config_service_endpoint(path="/users", method="GET")
-def search(limit=100):
+def search(limit=100, offset=0):
     """Loads all users.
 
     .. seealso:: Methods :func:`ringo_core.api.crud._search`
 
+    :limit: Limit number of result to N entries
+    :offset: Return entries with an offset of N
     :returns: List of :class:`User` instances
 
     >>> import ringo_core.api.user
@@ -29,7 +31,7 @@ def search(limit=100):
     True
     """
     with session_scope(get_db_session(), close=False) as db:
-        users = _search(db, User, limit)
+        users = _search(db, User, limit, offset)
     return users
 
 
