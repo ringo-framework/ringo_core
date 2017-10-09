@@ -13,11 +13,11 @@ and writing to the database.
 
 """
 import sqlalchemy as sa
-from ringo_service.api import NotFound
+from ringo_service.api import NotFound, ClientError
 from ringo_core.model.base import BaseItem
 
 
-def _search(db, clazz, limit=20, offset=0):
+def _search(db, clazz, limit=20, offset=0, search=""):
     """Will return all instances of `clazz`.
 
     :db: Session to the database.
@@ -28,7 +28,22 @@ def _search(db, clazz, limit=20, offset=0):
     """
     if not issubclass(clazz, BaseItem):
         raise TypeError("Create must be called with a clazz of type {}".format(BaseItem))
-    return db.query(clazz).slice(offset, limit).all()
+
+    query = db.query(clazz)
+
+    # Handle search filters.
+    if search != "":
+        try:
+            for _filter in search.split("|"):
+                key, value = _filter.split("::")
+                query = query.filter(getattr(clazz, key) == value)
+        except ValueError:
+            raise ClientError("Can not parse search filter")
+        except AttributeError:
+            # Key in search filter is not existing
+            raise ClientError("One of the fields in search filter are invalid")
+
+    return query.slice(offset, limit).all()
 
 
 def _create(db, clazz, values):
