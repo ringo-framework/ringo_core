@@ -29,7 +29,7 @@ def search(limit=100):
     True
     """
     with session_scope(get_db_session(), close=False) as db:
-        users = _search(db, User)
+        users = _search(db, User, limit)
     return users
 
 
