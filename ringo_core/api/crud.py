@@ -17,13 +17,14 @@ from ringo_service.api import NotFound, ClientError
 from ringo_core.model.base import BaseItem
 
 
-def _search(db, clazz, limit=20, offset=0, search=""):
+def _search(db, clazz, limit=20, offset=0, search="", sort=""):
     """Will return all instances of `clazz`.
 
     :db: Session to the database.
     :clazz: Class of which the instances should be loaded.
     :limit: Limit number of result to N entries
     :offset: Return entries with an offset of N
+    :sort: Define sort and ordering
     :returns: List of instances of clazz
     """
     if not issubclass(clazz, BaseItem):
@@ -41,7 +42,21 @@ def _search(db, clazz, limit=20, offset=0, search=""):
             raise ClientError("Can not parse search filter")
         except AttributeError:
             # Key in search filter is not existing
-            raise ClientError("One of the fields in search filter are invalid")
+            raise ClientError("One of the fields in search filter is invalid")
+
+    # Handle sort and ordering.
+    if sort != "":
+        try:
+            for key in sort.split("|"):
+                if key.startswith("-"):
+                    query = query.order_by(sa.desc(getattr(clazz, key.strip("-"))))
+                else:
+                    query = query.order_by(getattr(clazz, key.strip("+")))
+        except ValueError:
+            raise ClientError("Can not parse sort definition")
+        except AttributeError:
+            # Key in search filter is not existing
+            raise ClientError("One of the fields in sort definition is invalid")
 
     return query.slice(offset, limit).all()
 

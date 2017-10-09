@@ -16,7 +16,7 @@ from ringo_core.api.crud import (
 
 
 @config_service_endpoint(path="/users", method="GET")
-def search(limit=100, offset=0, search=""):
+def search(limit=100, offset=0, search="", sort=""):
     """Loads all users.
 
     .. seealso:: Methods :func:`ringo_core.api.crud._search`
@@ -32,7 +32,7 @@ def search(limit=100, offset=0, search=""):
     True
     """
     with session_scope(get_db_session(), close=False) as db:
-        users = _search(db, User, limit, offset, search)
+        users = _search(db, User, limit, offset, search, sort)
     return users
 
 
