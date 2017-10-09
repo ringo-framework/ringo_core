@@ -86,8 +86,8 @@ paths:
       summary: Get a single user
       parameters:
         - $ref: '#/parameters/item_id'
-        - name: 'values'
-          in: 'body'
+        - name: values
+          in: body
           description: 'Password of the user'
           schema:
             type: object
