@@ -56,13 +56,15 @@ class BaseItem(object):
         mapper = sa.inspect(self)
         return [column.key for column in mapper.attrs]
 
-    def get_values(self):
+    def get_values(self, fields=None):
         """Returns the values of the item as a dictionary.
+        :fields: List of fieldnames which should be included.
         :returns: Dictionary of values of the item.
         """
         values = {}
         for field in self.fields:
-            values[field] = getattr(self, field)
+            if fields is None or field in fields:
+                values[field] = getattr(self, field)
         return values
 
     def set_values(self, values):
