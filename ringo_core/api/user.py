@@ -16,23 +16,30 @@ from ringo_core.api.crud import (
 
 
 @config_service_endpoint(path="/users", method="GET")
-def search(limit=100, offset=0, search="", sort=""):
+def search(limit=100, offset=0, search="", sort="", fields=""):
     """Loads all users.
 
     .. seealso:: Methods :func:`ringo_core.api.crud._search`
 
-    :limit: Limit number of result to N entries
-    :offset: Return entries with an offset of N
-    :search: Return entries with an offset of N
-    :returns: List of :class:`User` instances
+    :limit: Limit number of result to N entries.
+    :offset: Return entries with an offset of N.
+    :search: Return entries with an offset of N.
+    :sort: Define sort and ordering.
+    :fields: Only return defined fields.
+    :returns: List of dictionary with values of the user
 
     >>> import ringo_core.api.user
     >>> users = ringo_core.api.user.search()
     >>> isinstance(users, list)
     True
     """
-    with session_scope(get_db_session(), close=False) as db:
+    if fields != "":
+        fields = fields.split("|")
+    else:
+        fields = None
+    with session_scope(get_db_session()) as db:
         users = _search(db, User, limit, offset, search, sort)
+        users = [user.get_values(fields) for user in users]
     return users
 
 

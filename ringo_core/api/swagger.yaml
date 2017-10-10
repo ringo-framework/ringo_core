@@ -33,6 +33,9 @@ paths:
         - name: sort
           in: query
           type: string
+        - name: fields
+          in: query
+          type: string
       responses:
         200:
           description: Return users
