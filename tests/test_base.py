@@ -49,6 +49,11 @@ def test_create_base_in_db(db, newbase):
     assert newbase.id == 1
 
 
+def test_(newbase):
+    values = newbase.__json__()
+    assert isinstance(values, dict)
+
+
 def test_base_fields(db, newbase):
     assert len(newbase.fields) == 4
 

@@ -44,6 +44,10 @@ class BaseItem(object):
         self.uuid = uuid.uuid4()
 
     def __json__(self):
+        """Method which returns the values of the item in a form which
+        can basically be serialised into JSON (e.g using
+        voorhees.to_json). In the default implementation this is a
+        dictionary with all values of the item."""
         return self.get_values()
 
     @classmethod
