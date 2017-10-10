@@ -10,6 +10,13 @@ The connection of the database is configured through a `RINGO_CORE_DB_URI` envir
 
 API
 ---
+The API gives access to all (currently) known uses cases related to the core
+models. Please do not access any attributes or methods on the model directly!
+Use the API to prevent unindented coupling with the underlying model. For this
+reason the API does return only simple datatype like dictionaries or lists.
+
+If you miss a use case which is not covered by the API, please make a feature
+request.
 
 User
 """"
