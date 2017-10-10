@@ -27,6 +27,43 @@ def test_search(randomstring):
     assert len(users) > 0
 
 
+def test_search_filters(randomstring):
+    import ringo_core.api.user
+    from ringo_service.api import ClientError
+    name = randomstring(8)
+    ringo_core.api.user.create(name=name, password="password")
+
+    offset = 0
+    limit = 10
+    search = "id::1|name::test"
+    sort = "id|-name"
+    fields = "id|name"
+    users = ringo_core.api.user.search(offset=offset, limit=limit,
+                                       search=search, sort=sort,
+                                       fields=fields)
+
+    with pytest.raises(ClientError):
+        search = "id:1|name::test"
+        users = ringo_core.api.user.search(offset=offset, limit=limit,
+                                           search=search, sort=sort,
+                                           fields=fields)
+    with pytest.raises(ClientError):
+        search = "id::1|xxx::test"
+        users = ringo_core.api.user.search(offset=offset, limit=limit,
+                                           search=search, sort=sort,
+                                           fields=fields)
+
+    with pytest.raises(ClientError):
+        search = "id::1|name::test"
+        sort = "id,updated"
+        users = ringo_core.api.user.search(offset=offset, limit=limit,
+                                           search=search, sort=sort,
+                                           fields=fields)
+
+    assert isinstance(users, list)
+    assert len(users) == 0
+
+
 def test_create(randomstring):
     import ringo_core.api.user
     name = randomstring(8)
@@ -53,6 +90,7 @@ def test_read(randomstring):
 
 
 def test_update(randomstring):
+    from ringo_service.api import NotFound
     import ringo_core.api.user
     name = randomstring(8)
     user = ringo_core.api.user.create(name=name, password="password")
@@ -60,6 +98,9 @@ def test_update(randomstring):
     updated = ringo_core.api.user.update(user['id'], values)
     assert updated['name'] == "updated"
     assert updated['updated'] != user['updated']
+
+    with pytest.raises(NotFound):
+        updated = ringo_core.api.user.update(9999, values)
 
 
 def test_delete(randomstring):
@@ -69,7 +110,7 @@ def test_delete(randomstring):
     user = ringo_core.api.user.create(name=name, password="password")
     ringo_core.api.user.delete(user['id'])
     with pytest.raises(NotFound):
-        user = ringo_core.api.user.read(9999)
+        user = ringo_core.api.user.delete(user['id'])
 
 
 def test_reset_password(randomstring):

@@ -52,8 +52,6 @@ def _search(db, clazz, limit=20, offset=0, search="", sort=""):
                     query = query.order_by(sa.desc(getattr(clazz, key.strip("-"))))
                 else:
                     query = query.order_by(getattr(clazz, key.strip("+")))
-        except ValueError:
-            raise ClientError("Can not parse sort definition")
         except AttributeError:
             # Key in search filter is not existing
             raise ClientError("One of the fields in sort definition is invalid")
