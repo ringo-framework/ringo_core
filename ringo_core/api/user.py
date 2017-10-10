@@ -51,15 +51,16 @@ def create(name, password):
 
     :name: Name of the new user
     :password: Password (unencrypted) of the new user
-    :returns: :class:`User` instance
+    :returns: Dictionary with values of the user
 
     >>> import ringo_core.api.user
     >>> user = ringo_core.api.user.create(name="foo1", password="bar")
-    >>> user.name
+    >>> user['name']
     'foo1'
     """
-    with session_scope(get_db_session(), close=False) as db:
+    with session_scope(get_db_session()) as db:
         user = _create(db, User, dict(name=name, password=password))
+        user = user.get_values()
     return user
 
 
@@ -70,7 +71,7 @@ def read(item_id):
     .. seealso:: Methods :func:`ringo_core.api.crud._read`
 
     :item_id: ID of the user to load.
-    :returns: :class:`User` instance
+    :returns: Dictionary with values of the user
 
 
     >>> import ringo_core.api.user
@@ -78,11 +79,13 @@ def read(item_id):
     >>> newuser = ringo_core.api.user.create(name="foo2", password="bar")
     >>> # Now load the user
     >>> loaduser = ringo_core.api.user.read(item_id = newuser.id)
-    >>> loaduser.name
+    >>> loaduser['name']
     'foo2'
     """
-    with session_scope(get_db_session(), close=False) as db:
-        return _read(db, User, item_id)
+    with session_scope(get_db_session()) as db:
+        user = _read(db, User, item_id)
+        user = user.get_values()
+    return user
 
 
 @config_service_endpoint(path="/users/{item_id}", method="PUT")
@@ -93,7 +96,7 @@ def update(item_id, values):
 
     :item_id: ID of the user to update
     :values: Dictionary of values
-    :returns: :class:`User` instance
+    :returns: Dictionary with values of the user
 
     >>> import ringo_core.api.user
     >>> # First create a new user.
@@ -101,11 +104,13 @@ def update(item_id, values):
     >>> # Now load the user
     >>> values = {"name": "baz"}
     >>> updateduser = ringo_core.api.user.update(item_id = newuser.id, values=values)
-    >>> updateduser.name
+    >>> updateduser['name']
     'baz'
     """
     with session_scope(get_db_session(), close=False) as db:
-        return _update(db, User, item_id, values)
+        user = _update(db, User, item_id, values)
+    user = user.get_values()
+    return user
 
 
 @config_service_endpoint(path="/users/{item_id}", method="DELETE")
