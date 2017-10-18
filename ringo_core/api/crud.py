@@ -13,7 +13,7 @@ and writing to the database.
 
 """
 import sqlalchemy as sa
-from ringo_service.api import NotFound, ClientError
+from ringo_service import NotFound, ClientError
 from ringo_core.model.base import BaseItem
 
 

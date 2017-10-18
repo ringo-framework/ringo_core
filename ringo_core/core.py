@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
-from ringo_service.service import start_service
+from ringo_service import start_service
 import ringo_core.api
 from ringo_core.model.user import User
 from ringo_core.lib.db import init_db

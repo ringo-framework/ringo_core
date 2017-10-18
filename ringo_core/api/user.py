@@ -3,7 +3,7 @@
 
 """
 Public API of the user model"""
-from ringo_service.api import config_service_endpoint
+from ringo_service import config_service_endpoint
 from ringo_core.lib.db import get_db_session, session_scope
 from ringo_core.model.user import User
 from ringo_core.api.crud import (
