@@ -13,8 +13,8 @@ init_storage()
 
 
 @pytest.fixture(scope='session')
-def dbmodel(request, engine):
-    init_storage(engine)
+def dbmodel(request):
+    init_storage()
 
 
 @pytest.fixture()
