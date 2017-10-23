@@ -12,7 +12,7 @@ import pytest
 
 
 def test_not_found():
-    from ringo_service.api import NotFound
+    from ringo_service.exceptions import NotFound
     import ringo_core.api.user
     with pytest.raises(NotFound):
         ringo_core.api.user.read(9999)
@@ -29,7 +29,7 @@ def test_search(randomstring):
 
 def test_search_filters(randomstring):
     import ringo_core.api.user
-    from ringo_service.api import ClientError
+    from ringo_service.exceptions import ClientError
     name = randomstring(8)
     ringo_core.api.user.create(name=name, password="password")
 
@@ -90,7 +90,7 @@ def test_read(randomstring):
 
 
 def test_update(randomstring):
-    from ringo_service.api import NotFound
+    from ringo_service.exceptions import NotFound
     import ringo_core.api.user
     name = randomstring(8)
     user = ringo_core.api.user.create(name=name, password="password")
@@ -104,7 +104,7 @@ def test_update(randomstring):
 
 
 def test_delete(randomstring):
-    from ringo_service.api import NotFound
+    from ringo_service.exceptions import NotFound
     import ringo_core.api.user
     name = randomstring(8)
     user = ringo_core.api.user.create(name=name, password="password")
