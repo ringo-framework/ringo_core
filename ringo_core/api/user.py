@@ -4,7 +4,7 @@
 """
 Public API of the user model"""
 from ringo_service import config_service_endpoint
-from ringo_core.lib.db import get_db_session, session_scope
+from ringo_storage import get_storage
 from ringo_core.model.user import User
 from ringo_core.api.crud import (
     _search,
@@ -37,8 +37,8 @@ def search(limit=100, offset=0, search="", sort="", fields=""):
         fields = fields.split("|")
     else:
         fields = None
-    with session_scope(get_db_session()) as db:
-        users = _search(db, User, limit, offset, search, sort)
+    with get_storage() as storage:
+        users = _search(storage, User, limit, offset, search, sort)
         users = [user.get_values(fields) for user in users]
     return users
 
@@ -58,8 +58,8 @@ def create(name, password):
     >>> user['name']
     'foo1'
     """
-    with session_scope(get_db_session()) as db:
-        user = _create(db, User, dict(name=name, password=password))
+    with get_storage() as storage:
+        user = _create(storage, User, dict(name=name, password=password))
         user = user.get_values()
     return user
 
@@ -82,8 +82,8 @@ def read(item_id):
     >>> loaduser['name']
     'foo2'
     """
-    with session_scope(get_db_session()) as db:
-        user = _read(db, User, item_id)
+    with get_storage() as storage:
+        user = _read(storage, User, item_id)
         user = user.get_values()
     return user
 
@@ -107,9 +107,9 @@ def update(item_id, values):
     >>> updateduser['name']
     'baz'
     """
-    with session_scope(get_db_session(), close=False) as db:
-        user = _update(db, User, item_id, values)
-    user = user.get_values()
+    with get_storage() as storage:
+        user = _update(storage, User, item_id, values)
+        user = user.get_values()
     return user
 
 
@@ -132,8 +132,8 @@ def delete(item_id):
         ...
     sqlalchemy.orm.exc.NoResultFound: No row was found for one()
     """
-    with session_scope(get_db_session()) as db:
-        return _delete(db, User, item_id)
+    with get_storage() as storage:
+        return _delete(storage, User, item_id)
 
 
 @config_service_endpoint(path="/users/{item_id}/password", method="POST")
@@ -159,7 +159,7 @@ def reset_password(item_id, password=None):
     >>> result != "newpass"
     True
     """
-    with session_scope(get_db_session()) as db:
-        user = _read(db, User, item_id)
+    with get_storage() as storage:
+        user = _read(storage, User, item_id)
         new_password = user.reset_password(password)
     return new_password

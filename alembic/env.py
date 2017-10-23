@@ -1,7 +1,7 @@
 from __future__ import with_statement
 from alembic import context
 from logging.config import fileConfig
-from ringo_core.lib.db import Base, DB_URI, get_db_engine
+from ringo_storage.storage import RDBMSStorageBase, ENGINE, DB_URI
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -15,7 +15,7 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = Base.metadata
+target_metadata = RDBMSStorageBase.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -49,7 +49,7 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    connectable = get_db_engine(DB_URI)
+    connectable = ENGINE
 
     with connectable.connect() as connection:
         context.configure(

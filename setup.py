@@ -11,6 +11,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     "ringo_service",
+    "ringo_storage",
     "passlib"
     # TODO: put package requirements here
 ]

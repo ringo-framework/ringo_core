@@ -9,9 +9,9 @@ class BaseFactory(object):
 
     """Factory for base objects"""
 
-    def __init__(self, clazz, db):
+    def __init__(self, clazz, storage):
         self.clazz = clazz
-        self.db = db
+        self.storage = storage
 
     def create(self):
         """Will create a new :class:`Base` object.
@@ -25,7 +25,7 @@ class BaseFactory(object):
         :returns: :class:`Base` object.
 
         """
-        return self.db.query(self.clazz).filter(self.clazz.id == item_id).one()
+        return self.storage.read(self.clazz, item_id)
 
 
 class BaseItem(object):
@@ -51,9 +51,9 @@ class BaseItem(object):
         return self.get_values()
 
     @classmethod
-    def get_factory(cls, db):
+    def get_factory(cls, storage):
         """Return an instance of a factory for this class."""
-        return BaseFactory(cls, db)
+        return BaseFactory(cls, storage)
 
     @property
     def fields(self):
