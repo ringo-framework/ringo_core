@@ -14,4 +14,12 @@ def test_password_encryption():
     password = "mysecurepassword"
     encrypt_password = encrypt_password(password)
     assert verify_password(password, encrypt_password)
-    assert not verify_password(password+"xxx", encrypt_password)
+    assert not verify_password(password + "xxx", encrypt_password)
+
+
+def test_generate_passwort():
+    from ringo_core.lib.security import generate_password
+    default_password = generate_password()
+    custom_password = generate_password(12)
+    assert len(default_password) == 8
+    assert len(custom_password) == 12
