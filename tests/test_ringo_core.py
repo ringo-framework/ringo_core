@@ -11,9 +11,6 @@ Tests for `ringo_core` module.
 import pytest
 
 
-from ringo_core import core
-
-
 @pytest.fixture
 def response():
     """Sample pytest fixture.
