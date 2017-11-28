@@ -13,8 +13,8 @@ and writing to the database.
 
 """
 import sqlalchemy as sa
-from ringo_service import NotFound, ClientError
-from ringo_core.model.base import BaseItem
+from tedega_service import NotFound, ClientError
+from tedega_core.model.base import BaseItem
 
 
 def _search(storage, clazz, limit=20, offset=0, search="", sort=""):

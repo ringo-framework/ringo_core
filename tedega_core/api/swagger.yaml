@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: Ringo Core API
+  title: Tedega Core API
   version: "0.1"
 consumes:
   - servicelication/json
@@ -14,7 +14,7 @@ paths:
   /users:
     get:
       tags: [Users]
-      operationId: ringo_service.api.search
+      operationId: tedega_service.api.search
       summary: Get all users
       parameters:
         - name: limit
@@ -45,7 +45,7 @@ paths:
               $ref: '#/definitions/User'
     post:
       tags: [Users]
-      operationId: ringo_service.api.create
+      operationId: tedega_service.api.create
       summary: Create a user
       parameters:
         - name: values
@@ -58,7 +58,7 @@ paths:
   /users/{item_id}:
     get:
       tags: [Users]
-      operationId: ringo_service.api.read
+      operationId: tedega_service.api.read
       summary: Get a single user
       parameters:
         - $ref: '#/parameters/item_id'
@@ -71,7 +71,7 @@ paths:
           description: User does not exist
     put:
       tags: [Users]
-      operationId: ringo_service.api.update
+      operationId: tedega_service.api.update
       summary: Update a user
       parameters:
         - $ref: '#/parameters/item_id'
@@ -84,7 +84,7 @@ paths:
           description: User updated
     delete:
       tags: [Users]
-      operationId: ringo_service.api.delete
+      operationId: tedega_service.api.delete
       summary: Remove a user
       parameters:
         - $ref: '#/parameters/item_id'
@@ -96,7 +96,7 @@ paths:
   /users/{item_id}/password:
     post:
       tags: [Users]
-      operationId: ringo_service.api.generic
+      operationId: tedega_service.api.generic
       summary: Get a single user
       parameters:
         - $ref: '#/parameters/item_id'

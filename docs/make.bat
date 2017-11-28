@@ -115,9 +115,9 @@ if "%1" == "qthelp" (
 	echo.
 	echo.Build finished; now you can run "qcollectiongenerator" with the ^
 .qhcp project file in %BUILDDIR%/qthelp, like this:
-	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\ringo_core.qhcp
+	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\tedega_core.qhcp
 	echo.To view the help file:
-	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\ringo_core.ghc
+	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\tedega_core.ghc
 	goto end
 )
 

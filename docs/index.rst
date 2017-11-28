@@ -1,4 +1,4 @@
-Welcome to Ringo Core's documentation!
+Welcome to Tedega Core's documentation!
 ======================================
 
 Contents:

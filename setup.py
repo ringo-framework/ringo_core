@@ -10,8 +10,8 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    "ringo_service",
-    "ringo_storage",
+    "tedega_service",
+    "tedega_storage",
     "passlib",
     "pyjwt"
     # TODO: put package requirements here
@@ -22,23 +22,23 @@ test_requirements = [
 ]
 
 setup(
-    name='ringo_core',
+    name='tedega_core',
     version='0.1.0',
-    description="Core libraries of the Ringo framework",
+    description="Core libraries of the Tedega framework",
     long_description=readme + '\n\n' + history,
     author="Torsten Irländer",
     author_email='torsten.irlaender@googlemail.com',
-    url='https://github.com/toirl/ringo_core',
+    url='https://github.com/toirl/tedega_core',
     packages=[
-        'ringo_core',
+        'tedega_core',
     ],
-    package_dir={'ringo_core':
-                 'ringo_core'},
+    package_dir={'tedega_core':
+                 'tedega_core'},
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='ringo_core',
+    keywords='tedega_core',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

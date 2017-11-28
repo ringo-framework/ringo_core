@@ -5,11 +5,11 @@
 test_base
 ----------------------------------
 
-Tests for `ringo_core.model.base` module.
+Tests for `tedega_core.model.base` module.
 """
-from ringo_storage import RDBMSStorageBase
-from ringo_core.model.base import BaseItem
-from ringo_core.model.mixins import Protocol
+from tedega_storage import RDBMSStorageBase
+from tedega_core.model.base import BaseItem
+from tedega_core.model.mixins import Protocol
 
 
 class Dummy(Protocol, BaseItem, RDBMSStorageBase):

@@ -1,4 +1,4 @@
-* Ringo Core version:
+* Tedega Core version:
 * Python version:
 * Operating System:
 

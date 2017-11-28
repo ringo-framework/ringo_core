@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import uuid
 import sqlalchemy as sa
-from ringo_core.model.datatypes import UUID
+from tedega_core.model.datatypes import UUID
 
 
 class BaseFactory(object):
@@ -29,7 +29,7 @@ class BaseFactory(object):
 
 
 class BaseItem(object):
-    """Base for all models in Ringo"""
+    """Base for all models in Tedega"""
 
     id = sa.Column("id", sa.Integer, primary_key=True)
     """Local unique identifier within the database. Used to load datasets

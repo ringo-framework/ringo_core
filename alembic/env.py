@@ -1,7 +1,7 @@
 from __future__ import with_statement
 from alembic import context
 from logging.config import fileConfig
-from ringo_storage.storage import RDBMSStorageBase, ENGINE, DB_URI
+from tedega_storage.storage import RDBMSStorageBase, ENGINE, DB_URI
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

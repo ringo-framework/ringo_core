@@ -1,13 +1,13 @@
-ringo\_core\.api package
+tedega\_core\.api package
 ========================
 
 Submodules
 ----------
 
-ringo\_core\.api\.crud module
+tedega\_core\.api\.crud module
 -----------------------------
 
-.. automodule:: ringo_core.api.crud
+.. automodule:: tedega_core.api.crud
     :members:
     :undoc-members:
     :show-inheritance:
@@ -16,7 +16,7 @@ ringo\_core\.api\.crud module
 Module contents
 ---------------
 
-.. automodule:: ringo_core.api
+.. automodule:: tedega_core.api
     :members:
     :undoc-members:
     :show-inheritance:

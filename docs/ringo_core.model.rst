@@ -1,29 +1,29 @@
-ringo\_core\.model package
+tedega\_core\.model package
 ==========================
 
 Submodules
 ----------
 
-ringo\_core\.model\.base module
+tedega\_core\.model\.base module
 -------------------------------
 
-.. automodule:: ringo_core.model.base
+.. automodule:: tedega_core.model.base
     :members:
     :undoc-members:
     :show-inheritance:
 
-ringo\_core\.model\.datatypes module
+tedega\_core\.model\.datatypes module
 ------------------------------------
 
-.. automodule:: ringo_core.model.datatypes
+.. automodule:: tedega_core.model.datatypes
     :members:
     :undoc-members:
     :show-inheritance:
 
-ringo\_core\.model\.mixins module
+tedega\_core\.model\.mixins module
 ---------------------------------
 
-.. automodule:: ringo_core.model.mixins
+.. automodule:: tedega_core.model.mixins
     :members:
     :undoc-members:
     :show-inheritance:
@@ -32,7 +32,7 @@ ringo\_core\.model\.mixins module
 Module contents
 ---------------
 
-.. automodule:: ringo_core.model
+.. automodule:: tedega_core.model
     :members:
     :undoc-members:
     :show-inheritance:

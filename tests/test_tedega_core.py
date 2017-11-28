@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-test_ringo_core
+test_tedega_core
 ----------------------------------
 
-Tests for `ringo_core` module.
+Tests for `tedega_core` module.
 """
 
 import pytest

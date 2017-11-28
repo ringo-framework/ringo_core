@@ -5,13 +5,13 @@
 test_crud
 ----------------------------------
 
-Tests for `ringo_core.api.crud` module.
+Tests for `tedega_core.api.crud` module.
 """
 import pytest
 
-from ringo_storage import RDBMSStorageBase as Base
-from ringo_core.model.base import BaseItem
-from ringo_core.model.mixins import Protocol
+from tedega_storage import RDBMSStorageBase as Base
+from tedega_core.model.base import BaseItem
+from tedega_core.model.mixins import Protocol
 
 
 class Dummy(Protocol, BaseItem, Base):
@@ -20,64 +20,64 @@ class Dummy(Protocol, BaseItem, Base):
 
 
 def test_searech_fail_because_not_base(storage):
-    from ringo_core.api.crud import _search
+    from tedega_core.api.crud import _search
     with pytest.raises(TypeError):
         _search(storage, object)
 
 
 def test_create_fail_because_not_base(storage):
-    from ringo_core.api.crud import _create
+    from tedega_core.api.crud import _create
     with pytest.raises(TypeError):
         _create(storage, object, {})
 
 
 def test_read_fail_because_not_base(storage):
-    from ringo_core.api.crud import _read
+    from tedega_core.api.crud import _read
     with pytest.raises(TypeError):
         _read(storage, object, 12)
 
 
 def test_read_fail_because_not_integer(storage):
-    from ringo_core.api.crud import _read
+    from tedega_core.api.crud import _read
     with pytest.raises(TypeError):
         _read(storage, Dummy, "12")
 
 
 def test_update_fail_because_not_base(storage):
-    from ringo_core.api.crud import _update
+    from tedega_core.api.crud import _update
     with pytest.raises(TypeError):
         _update(storage, object, 12, {})
 
 
 def test_update_fail_because_not_integer(storage):
-    from ringo_core.api.crud import _update
+    from tedega_core.api.crud import _update
     with pytest.raises(TypeError):
         _update(storage, Dummy, "12", {})
 
 
 def test_create_fail_because_not_dict(storage):
-    from ringo_core.api.crud import _create
+    from tedega_core.api.crud import _create
     with pytest.raises(TypeError):
         _create(storage, Dummy, "Value")
 
 
 def test_update_fail_because_not_dict(storage):
-    from ringo_core.api.crud import _update
+    from tedega_core.api.crud import _update
     with pytest.raises(TypeError):
         _update(storage, Dummy, 12, "Value")
 
 
 def test_create_fail_because_wrong_paramaters(storage):
-    from ringo_core.api.crud import _create
+    from tedega_core.api.crud import _create
     with pytest.raises(TypeError):
         # Dummy create does not expect "foo"
         _create(storage, Dummy, {"foo": "bar"})
 
 
 def test_search():
-    from ringo_storage import get_storage
-    from ringo_core.api.crud import _search
-    from ringo_service import ClientError
+    from tedega_storage import get_storage
+    from tedega_core.api.crud import _search
+    from tedega_service import ClientError
 
     # Search
     with get_storage() as storage:
@@ -99,8 +99,8 @@ def test_search():
 
 
 def test_crud():
-    from ringo_storage import get_storage
-    from ringo_core.api.crud import _create, _read, _update, _delete
+    from tedega_storage import get_storage
+    from tedega_core.api.crud import _create, _read, _update, _delete
     with get_storage() as storage:
         item = _create(storage, Dummy, {})
         _read(storage, Dummy, item.id)
@@ -109,9 +109,9 @@ def test_crud():
 
 
 def test_notfound_error():
-    from ringo_core.api.crud import _read, _update, _delete
-    from ringo_service import NotFound
-    from ringo_storage import get_storage
+    from tedega_core.api.crud import _read, _update, _delete
+    from tedega_service import NotFound
+    from tedega_storage import get_storage
     with pytest.raises(NotFound):
         with get_storage() as storage:
             _read(storage, Dummy, 12)
