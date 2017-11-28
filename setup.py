@@ -18,6 +18,7 @@ requirements = [
 ]
 
 test_requirements = [
+    "pytest-sqlalchemy"
     # TODO: put package test requirements here
 ]
 
