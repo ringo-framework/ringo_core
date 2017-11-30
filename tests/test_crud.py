@@ -77,7 +77,7 @@ def test_create_fail_because_wrong_paramaters(storage):
 def test_search():
     from tedega_storage import get_storage
     from tedega_core.api.crud import _search
-    from tedega_service import ClientError
+    from tedega_view import ClientError
 
     # Search
     with get_storage() as storage:
@@ -110,7 +110,7 @@ def test_crud():
 
 def test_notfound_error():
     from tedega_core.api.crud import _read, _update, _delete
-    from tedega_service import NotFound
+    from tedega_view import NotFound
     from tedega_storage import get_storage
     with pytest.raises(NotFound):
         with get_storage() as storage:

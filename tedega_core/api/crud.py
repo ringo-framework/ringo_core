@@ -13,7 +13,7 @@ and writing to the database.
 
 """
 import sqlalchemy as sa
-from tedega_service import NotFound, ClientError
+from tedega_view import NotFound, ClientError
 from tedega_core.model.base import BaseItem
 
 

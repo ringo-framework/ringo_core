@@ -10,7 +10,7 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    "tedega_service",
+    "tedega_view",
     "tedega_storage",
     "passlib",
     "pyjwt"
