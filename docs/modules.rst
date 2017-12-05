@@ -1,7 +1,7 @@
-tedega_core
+tedega_share
 ==========
 
 .. toctree::
    :maxdepth: 4
 
-   tedega_core
+   tedega_share

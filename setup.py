@@ -23,23 +23,23 @@ test_requirements = [
 ]
 
 setup(
-    name='tedega_core',
+    name='tedega_share',
     version='0.1.0',
     description="Core libraries of the Tedega framework",
     long_description=readme + '\n\n' + history,
     author="Torsten Irländer",
     author_email='torsten.irlaender@googlemail.com',
-    url='https://github.com/toirl/tedega_core',
+    url='https://github.com/toirl/tedega_share',
     packages=[
-        'tedega_core',
+        'tedega_share',
     ],
-    package_dir={'tedega_core':
-                 'tedega_core'},
+    package_dir={'tedega_share':
+                 'tedega_share'},
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='tedega_core',
+    keywords='tedega_share',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',

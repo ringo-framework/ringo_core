@@ -3,18 +3,18 @@ Tedega Core
 ===============================
 
 
-.. image:: https://img.shields.io/pypi/v/tedega_core.svg
-        :target: https://pypi.python.org/pypi/tedega_core
+.. image:: https://img.shields.io/pypi/v/tedega_share.svg
+        :target: https://pypi.python.org/pypi/tedega_share
 
-.. image:: https://img.shields.io/travis/toirl/tedega_core.svg
-        :target: https://travis-ci.org/toirl/tedega_core
+.. image:: https://img.shields.io/travis/toirl/tedega_share.svg
+        :target: https://travis-ci.org/toirl/tedega_share
 
 .. image:: https://readthedocs.org/projects/tedega-core/badge/?version=latest
         :target: https://tedega-core.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/toirl/tedega_core/shield.svg
-     :target: https://pyup.io/repos/github/toirl/tedega_core/
+.. image:: https://pyup.io/repos/github/toirl/tedega_share/shield.svg
+     :target: https://pyup.io/repos/github/toirl/tedega_share/
      :alt: Updates
 
 

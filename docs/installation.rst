@@ -12,7 +12,7 @@ To install Tedega Core, run this command in your terminal:
 
 .. code-block:: console
 
-    $ pip install tedega_core
+    $ pip install tedega_share
 
 This is the preferred method to install Tedega Core, as it will always install the most recent stable release. 
 
@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/toirl/tedega_core
+    $ git clone git://github.com/toirl/tedega_share
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/toirl/tedega_core/tarball/master
+    $ curl  -OL https://github.com/toirl/tedega_share/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/toirl/tedega_core
-.. _tarball: https://github.com/toirl/tedega_core/tarball/master
+.. _Github repo: https://github.com/toirl/tedega_share
+.. _tarball: https://github.com/toirl/tedega_share/tarball/master

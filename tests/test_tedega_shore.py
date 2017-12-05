@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-test_tedega_core
+test_tedega_share
 ----------------------------------
 
-Tests for `tedega_core` module.
+Tests for `tedega_share` module.
 """
 
 import pytest
