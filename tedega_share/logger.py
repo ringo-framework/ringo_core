@@ -41,18 +41,22 @@ class Logger(object):
         return voorhees.to_json(msg)
 
     def debug(self, message, category=None, correlation_id=None):
+        """Write a debug message."""
         message = self._build_message(message, category, correlation_id)
         self._logger.debug(message)
 
     def info(self, message, category=None, correlation_id=None):
+        """Write a info message."""
         message = self._build_message(message, category, correlation_id)
         self._logger.info(message)
 
     def error(self, message, category=None, correlation_id=None):
+        """Write a error message."""
         message = self._build_message(message, category, correlation_id)
         self._logger.error(message)
 
     def warning(self, message, category=None, correlation_id=None):
+        """Write a warning message."""
         message = self._build_message(message, category, correlation_id)
         self._logger.warning(message)
 
