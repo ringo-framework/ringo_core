@@ -12,6 +12,8 @@ with open('HISTORY.rst') as history_file:
 requirements = [
     "tedega_view",
     "tedega_storage",
+    "fluent-logger",
+    "voorhees",
     "passlib",
     "pyjwt"
     # TODO: put package requirements here
