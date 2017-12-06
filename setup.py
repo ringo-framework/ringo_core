@@ -14,6 +14,7 @@ requirements = [
     "tedega_storage",
     "fluent-logger",
     "voorhees",
+    "psutil",
     "passlib",
     "pyjwt"
     # TODO: put package requirements here
