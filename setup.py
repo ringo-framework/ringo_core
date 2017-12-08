@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -33,11 +33,7 @@ setup(
     author="Torsten Irländer",
     author_email='torsten.irlaender@googlemail.com',
     url='https://github.com/toirl/tedega_share',
-    packages=[
-        'tedega_share',
-    ],
-    package_dir={'tedega_share':
-                 'tedega_share'},
+    packages=find_packages(),
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
