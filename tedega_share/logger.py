@@ -223,7 +223,7 @@ def build_tag(service):
     return ".".join(tag)
 
 
-def init_logger(service, host="localhost", port=24224):
+def init_logger(service, host="fluentd", port=24224):
     """Will initialise a global :class:`Logger` instance to log to fluentd.
 
     :tag: String used as tag for fluentd log routing.
