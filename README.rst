@@ -28,7 +28,13 @@ Shared libraries of the Tedega framework
 Features
 --------
 
-* TODO
+* Logging 
+        * Fluentd support 
+        * Systen (CPU, Disk, Memory)
+        * Process time
+        * Connectivity (Can other systen be reached?)
+* Security
+        * Password en/decryption and verfication
 
 Credits
 ---------
