@@ -28,7 +28,7 @@ test_requirements = [
 setup(
     name='tedega_share',
     version='0.1.0',
-    description="Core libraries of the Tedega framework",
+    description="Shared libraries of the Tedega framework",
     long_description=readme + '\n\n' + history,
     author="Torsten Irländer",
     author_email='torsten.irlaender@googlemail.com',

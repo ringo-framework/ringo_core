@@ -1,6 +1,6 @@
-===============================
-Tedega Core
-===============================
+============
+Tedega Share 
+============
 
 
 .. image:: https://img.shields.io/pypi/v/tedega_share.svg
@@ -18,11 +18,11 @@ Tedega Core
      :alt: Updates
 
 
-Core libraries of the Tedega framework
+Shared libraries of the Tedega framework
 
 
 * Free software: MIT license
-* Documentation: https://tedega-core.readthedocs.io.
+* Documentation: https://tedega.readthedocs.io.
 
 
 Features
